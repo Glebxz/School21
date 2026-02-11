@@ -1,0 +1,53 @@
+#include "../brick_game/tetris/s21_tetris.h"
+
+#test one
+FSM(Start);
+int x = 500000;
+while (x--) {
+    for (int action = 3; action <= 7; action++) {
+        userInput(action, 0);
+    }
+    if (x % 100 == 0) {
+        FSM(Start);
+    }
+}
+x = 500000;
+while (x--) {
+    for (int action = 3; action <= 7; action++) {
+        userInput(action, 0);
+    }
+    if (x % 100 == 0) {
+        FSM(Start);
+    }
+}
+x = 500000;
+while (x--) {
+    for (int action = 3; action <= 7; action++) {
+        userInput(action, 0);
+    }
+    if (x % 100 == 0) {
+        FSM(Start);
+    }
+}
+x = 500000;
+while (x--) {
+    for (int action = 3; action <= 7; action++) {
+        userInput(action, 0);
+    }
+    if (x % 100 == 0) {
+        FSM(Start);
+    }
+}
+updateCurrentState();
+SwitchLevel();
+CheckAttaching();
+RotateI();
+RotateLJSZT();
+CalcScore(0);
+CalcScore(100);
+CalcScore(300);
+CalcScore(700);
+CalcScore(1500);
+RemoveAttach(10);
+ResetGameInfo();
+FSM(Terminate);

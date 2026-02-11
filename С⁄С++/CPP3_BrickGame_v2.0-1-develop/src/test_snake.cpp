@@ -1,0 +1,121 @@
+#include <gtest/gtest.h>
+
+#include "./brick_game/snake/s21_snake.h"
+
+TEST(SnakeTest, t1) {
+  SnakeGameModel MyGame{};
+  MyGame.FSM(static_cast<UserAction_t>(100));
+  MyGame.FSM(static_cast<UserAction_t>(0));
+  for (int i = 0; i < 50; i++) {
+    updateCurrentState();
+    MyGame.FSM(static_cast<UserAction_t>(0));
+    userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+    userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+    sleep(1);
+    userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+    userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  }
+  MyGame.ChangeDirection(static_cast<UserAction_t>((std::rand() % 5) + 3));
+  MyGame.SetScore();
+  MyGame.CheckWin();
+  MyGame.UpdateHighScore();
+  MyGame.SpawnApple();
+  MyGame.SnakeGrow();
+  MyGame.Timer(true);
+  MyGame.Timer(false);
+  MyGame.CheckEatApple();
+  MyGame.CheckWin();
+  MyGame.MoveForward();
+  MyGame.CheckCollisionBody();
+  MyGame.CheckCollisionWalls();
+  MyGame.UpdateHighScore();
+  MyGame.UpdateHighScore();
+  MyGame.ResetGame();
+  updateCurrentState();
+  MyGame.FSM(static_cast<UserAction_t>(0));
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  sleep(1);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  MyGame.game_state_ = 2;
+  MyGame.ChangeDirection(static_cast<UserAction_t>((std::rand() % 5) + 3));
+  MyGame.SetScore();
+  MyGame.CheckWin();
+  MyGame.UpdateHighScore();
+  MyGame.SpawnApple();
+  MyGame.SnakeGrow();
+  MyGame.Timer(true);
+  MyGame.Timer(false);
+  MyGame.CheckEatApple();
+  MyGame.CheckWin();
+  MyGame.MoveForward();
+  MyGame.CheckCollisionBody();
+  MyGame.CheckCollisionWalls();
+  MyGame.UpdateHighScore();
+  MyGame.UpdateHighScore();
+  MyGame.ResetGame();
+  updateCurrentState();
+  MyGame.FSM(static_cast<UserAction_t>(0));
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  sleep(1);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  MyGame.game_state_ = 3;
+  MyGame.ChangeDirection(static_cast<UserAction_t>((std::rand() % 5) + 3));
+  MyGame.SetScore();
+  MyGame.CheckWin();
+  MyGame.UpdateHighScore();
+  MyGame.SpawnApple();
+  MyGame.SnakeGrow();
+  MyGame.Timer(true);
+  MyGame.Timer(false);
+  MyGame.CheckEatApple();
+  MyGame.CheckWin();
+  MyGame.MoveForward();
+  MyGame.CheckCollisionBody();
+  MyGame.CheckCollisionWalls();
+  MyGame.UpdateHighScore();
+  MyGame.UpdateHighScore();
+  MyGame.ResetGame();
+  updateCurrentState();
+  MyGame.FSM(static_cast<UserAction_t>(0));
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  sleep(1);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  MyGame.game_state_ = 4;
+  MyGame.ChangeDirection(static_cast<UserAction_t>((std::rand() % 5) + 3));
+  MyGame.SetScore();
+  MyGame.CheckWin();
+  MyGame.UpdateHighScore();
+  MyGame.SpawnApple();
+  MyGame.SnakeGrow();
+  MyGame.Timer(true);
+  MyGame.Timer(false);
+  MyGame.CheckEatApple();
+  MyGame.CheckWin();
+  MyGame.MoveForward();
+  MyGame.CheckCollisionBody();
+  MyGame.CheckCollisionWalls();
+  MyGame.UpdateHighScore();
+  MyGame.UpdateHighScore();
+  MyGame.ResetGame();
+  updateCurrentState();
+  MyGame.FSM(static_cast<UserAction_t>(0));
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  sleep(1);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  userInput(static_cast<UserAction_t>((std::rand() % 5) + 3), false);
+  MyGame.game_state_ = 5;
+  userInput(static_cast<UserAction_t>(1), false);
+  userInput(static_cast<UserAction_t>(2), false);
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
