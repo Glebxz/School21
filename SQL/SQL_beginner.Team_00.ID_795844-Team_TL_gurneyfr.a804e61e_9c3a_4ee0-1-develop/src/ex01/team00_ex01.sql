@@ -1,0 +1,1 @@
+SELECT * FROM full_list_of_tours;
