@@ -15,8 +15,19 @@ import (
 func NewApp() fx.Option {
 	return fx.Options(
 		fx.Provide(
-			datasource.NewStorageInMem,
-			service.NewDefaultService,
+			fx.Annotate(
+				datasource.NewSQLRep,
+				fx.As(new(service.Repository)),
+			),
+			fx.Annotate(
+				service.NewGameService,
+				fx.As(new(web.GameService)),
+			),
+			fx.Annotate(
+				service.NewUserService,
+				fx.As(new(web.UserService)),
+			),
+			web.NewJwtProvider,
 			web.NewGameHandler,
 		),
 		fx.Invoke(
@@ -30,8 +41,18 @@ func NewApp() fx.Option {
 
 func StartServer(lc fx.Lifecycle, handler *web.GameHandler) {
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /new/{uuid}", handler.CreateNewGame)
-	mux.HandleFunc("POST /game/{uuid}", handler.NextStep)
+	mux.HandleFunc("POST /signup", handler.SignUp)
+	mux.HandleFunc("POST /signin", handler.SignIn)
+	mux.HandleFunc("POST /refresh", handler.RefreshAccessToken)
+	mux.HandleFunc("POST /new/ai", handler.JwtMiddleware()(handler.CreateNewAIGame))
+	mux.HandleFunc("POST /new/pvp", handler.JwtMiddleware()(handler.CreateNewPVPGame))
+	mux.HandleFunc("GET /avaliable_games", handler.JwtMiddleware()(handler.GetAvaliableGames))
+	mux.HandleFunc("GET /finished_games", handler.JwtMiddleware()(handler.GetFinishedGames))
+	mux.HandleFunc("POST /join/{game_id}", handler.JwtMiddleware()(handler.JoinGame))
+	mux.HandleFunc("GET /game/{game_id}", handler.JwtMiddleware()(handler.UpdateGame))
+	mux.HandleFunc("POST /move/{game_id}", handler.JwtMiddleware()(handler.MakeTurn))
+	mux.HandleFunc("GET /users/info", handler.JwtMiddleware()(handler.UserInfo))
+	mux.HandleFunc("GET /leaderboard", handler.JwtMiddleware()(handler.Leaderboard))
 
 	server := http.Server{
 		Addr:    "localhost:8080",

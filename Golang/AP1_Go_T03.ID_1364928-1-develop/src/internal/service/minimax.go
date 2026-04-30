@@ -8,11 +8,11 @@ type move struct {
 	i, j int
 }
 
-func minMax(board domain.Board, turn int) (domain.Board, int) {
-	check := checkGameOver(board)
-	if check == domain.O {
+func minMax(board domain.Board, turn domain.Cell) (domain.Board, int) {
+	check := board.CheckGameState()
+	if check == domain.WinO {
 		return board, 1
-	} else if check == domain.X {
+	} else if check == domain.WinX {
 		return board, -1
 	} else if check == domain.Draw {
 		return board, 0
